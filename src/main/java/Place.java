@@ -1,11 +1,12 @@
 public class Place {
 
-  
-  public Place (String location) {
+  private String mLocation;
 
+  public Place (String location) {
+    mLocation = location;
   }
 
   public String getLocation() {
-    return "";
+    return mLocation;
   }
 }

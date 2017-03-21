@@ -12,16 +12,23 @@ public class App {
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
-      model.put("location", request.session().attribute("location"));
+      model.put("locations", request.session().attribute("locations"));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     post("/location", (request, response)-> {
       Map<String, Object> model = new HashMap<String, Object>();
 
-      String location = request.queryParams("location");
+      ArrayList<Place> locationsArray = request.session().attribute("locations");
+
+      if(locationsArray == null) {
+        locationsArray = new ArrayList<Place>();
+        request.session().attribute("locations", locationsArray);
+      }
+
+      String location = request.queryParams("locations");
       Place newPlace = new Place(location);
-      request.session().attribute("location", newPlace);
+      locationsArray.add(newPlace);
 
       model.put("template", "templates/success.vtl");
       return new ModelAndView(model, layout);

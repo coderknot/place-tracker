@@ -1,0 +1,18 @@
+<!--index.vtl-->
+<h1>Location, location, location!!!!</h1>
+#if ($location)
+  <p>Current location, location, location:</p>
+  <p>$location.getLocation()</p>
+#else
+  <p>No location, location, location</p>
+#end
+
+<h1>Add the location of the places you have been!</h1>
+
+<form action="/location" method="post">
+  <label for="location"> Location: </label>
+  <input id="location" name="location" type="text">
+
+  <button type="submit" class="btn btn-default"> Add location!</button>
+</form>
+<!--index.vtl-->
